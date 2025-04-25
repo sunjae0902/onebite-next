@@ -1,4 +1,4 @@
-html,
+html, /* React component 밖의 요소이므로 따로 관리*/
 body {
     margin: 0px;
     padding: 0px;
