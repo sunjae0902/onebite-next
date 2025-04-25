@@ -1,4 +1,4 @@
-import GlobalLayout from '@/components/global-layout';
+import GlobalLayout from '@/components/global/global-layout';
 import '@/styles/globals.css';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';

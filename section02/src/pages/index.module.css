@@ -1,3 +1,9 @@
-.h1{
-    color: red;
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container h3 { /* 내부에 있는 모든 h3에 적용 */
+    margin-bottom: 0px;
 }
