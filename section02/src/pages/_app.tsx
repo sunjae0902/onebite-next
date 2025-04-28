@@ -4,7 +4,7 @@ import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { ReactNode } from 'react';
 
-type NextPageWithLayout = NextPage & {
+type NextPageWithLayout = NextPage & { 
   getLayout?: (page: ReactNode) => ReactNode; // 옵셔널 타입으로 선언
 };
 
