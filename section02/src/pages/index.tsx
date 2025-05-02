@@ -5,10 +5,10 @@ import BookItem from '@/components/books/boot-item';
 import {InferGetStaticPropsType } from 'next';
 import fetchBooks from '@/lib/main/fetch-books';
 import fetchRandomBooks from '@/lib/main/fetch-random-books';
-
+import Head from 'next/head';
 
 export const getStaticProps = async () => { 
-  const [bookList, recommendedBookList] = await Promise.all([ // 여러 비동기 함수 동시에 호출!!
+  const [bookList, recommendedBookList] = await Promise.all([ 
     fetchBooks(),
     fetchRandomBooks()
   ]);
@@ -18,12 +18,19 @@ export const getStaticProps = async () => {
       bookList,
       recommendedBookList
     },
-    revalidate: 3 // ISR
+    revalidate: 3 
   };
 };
 
-export default function Home({ bookList, recommendedBookList }: InferGetStaticPropsType<typeof getStaticProps>) { // 메서드에서 props 받아옴
+export default function Home({ bookList, recommendedBookList }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
+    <>
+      <Head>
+        <title>한입북스</title>
+        <meta property="og:image" content="/thumnail.png"></meta>
+        <meta property="og:title" content="한입북스"></meta>
+        <meta property='og:description' content='한입 북스에 등록된 도서들을 만나보세요.'></meta>
+      </Head>
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
@@ -33,10 +40,11 @@ export default function Home({ bookList, recommendedBookList }: InferGetStaticPr
         <h3>등록된 모든 도서</h3>
         {bookList.map((book) => <BookItem key={book.id} {...book} />)}
       </section>
-    </div>
+      </div>
+      </>
   );
 }
 
-Home.getLayout = (page: ReactNode) => { // 객체에 메서드 추가
+Home.getLayout = (page: ReactNode) => { 
   return <SearchableLayout>{page}</SearchableLayout>;
 };

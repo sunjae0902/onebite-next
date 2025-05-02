@@ -1,6 +1,7 @@
 import style from './[id].module.css';
 import {GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchBookItem from "@/lib/main/content/fetch-book-item";
+import Head from 'next/head';
 
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -19,6 +20,13 @@ export default function Page({bookItem} : InferGetServerSidePropsType<typeof get
     }
 
     return (
+        <>
+            <Head>
+                <title>{bookItem.title}</title>
+                <meta property="og:image" content={bookItem.coverImgUrl}></meta>
+                <meta property="og:title" content={bookItem.title}></meta>
+                <meta property='og:description' content={bookItem.description}></meta>
+            </Head>
         <div className={style.container}>
             <div className = {style.cover_img_container} style={{ backgroundImage: `url('${bookItem.coverImgUrl}')` }}>
                 <img src={bookItem.coverImgUrl} />
@@ -29,6 +37,7 @@ export default function Page({bookItem} : InferGetServerSidePropsType<typeof get
                 <div className={style.author}>{bookItem.author} | {bookItem.publisher}</div>
             </div>
             <div className={style.description}>{bookItem.description}</div>
-        </div>
+            </div>
+            </>
     );
 }
