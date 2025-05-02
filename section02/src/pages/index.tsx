@@ -8,7 +8,6 @@ import fetchRandomBooks from '@/lib/main/fetch-random-books';
 
 
 export const getStaticProps = async () => { 
-  console.log("getStaticProps: SSG")
   const [bookList, recommendedBookList] = await Promise.all([ // 여러 비동기 함수 동시에 호출!!
     fetchBooks(),
     fetchRandomBooks()
@@ -18,7 +17,8 @@ export const getStaticProps = async () => {
     props: {
       bookList,
       recommendedBookList
-    }
+    },
+    revalidate: 3 // ISR
   };
 };
 
