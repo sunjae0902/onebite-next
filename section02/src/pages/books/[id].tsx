@@ -1,6 +1,5 @@
-import { useRouter } from "next/router";
 import style from './[id].module.css';
-import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import {GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchBookItem from "@/lib/main/content/fetch-book-item";
 
 
@@ -14,7 +13,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 }
 
 export default function Page({bookItem} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const router = useRouter();
     
     if (!bookItem) {
         return "문제가 발생했습니다. 다시 시도해주세요.";
